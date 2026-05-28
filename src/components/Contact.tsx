@@ -2,6 +2,12 @@
 
 import { motion } from "framer-motion";
 
+// Enhanced Email Link with pre-filled Subject and Body
+const EMAIL = "aditya.chourasia.work@gmail.com";
+const SUBJECT = encodeURIComponent("Hello Aditya! Let's connect.");
+const BODY = encodeURIComponent("Hi Aditya,\n\nI saw your portfolio and would love to chat about...");
+const MAILTO_LINK = `mailto:${EMAIL}?subject=${SUBJECT}&body=${BODY}`;
+
 const socialLinks = [
   {
     name: "GitHub",
@@ -32,13 +38,23 @@ const socialLinks = [
         <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
       </svg>
     ),
-    url: "mailto:aditya.chourasia.work@gmail.com",
+    url: MAILTO_LINK,
   },
   {
     name: "LeetCode",
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
         <path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.939 5.939 0 0 0 1.271 1.543l4.359 4.159c.88.841 2.37.841 3.25 0 .87-.83.87-2.18 0-3.01l-2.606-2.486a.434.434 0 0 1 0-.613l2.606-2.486c.88-.84 2.37-.84 3.25 0 .87.83.87 2.18 0 3.01l-2.606 2.486a.434.434 0 0 1 0 .613l4.359 4.159c.88.841 2.37.841 3.25 0 .87-.83.87-2.18 0-3.01l-7.608-7.262a.434.434 0 0 1 0-.613l5.408-5.163c.88-.84 2.37-.84 3.25 0 .87.83.87 2.18 0 3.01l-2.606 2.486a.434.434 0 0 1 0 .613l2.606 2.486c.88.84 2.37.84 3.25 0 .87-.83.87-2.18 0-3.01l-4.359-4.159a5.939 5.939 0 0 0-1.271-1.543 5.83 5.83 0 0 0-.349-1.017 5.527 5.527 0 0 0-.062-2.362 5.35 5.35 0 0 0 .125-.513 5.266 5.266 0 0 0 1.209-2.104l3.854-4.126L14.444.438A1.374 1.374 0 0 0 13.483 0zm0 2.756l5.408 5.163a.434.434 0 0 1 0 .613l-2.606 2.486c-.88.84-2.37.84-3.25 0-.87-.83-.87-2.18 0-3.01l2.606-2.486a.434.434 0 0 1 0-.613l-5.408-5.163c-.88-.84-2.37-.84-3.25 0-.87.83-.87 2.18 0 3.01l7.608 7.262a.434.434 0 0 1 0 .613l-4.359 4.159c-.88.841-2.37.841-3.25 0-.87-.83-.87-2.18 0-3.01l2.606-2.486a.434.434 0 0 1 0-.613l-2.606-2.486c-.88-.84-2.37-.84-3.25 0-.87.83-.87 2.18 0 3.01l2.606 2.486a.434.434 0 0 1 0 .613l-4.359 4.159c-.88.841-2.37.841-3.25 0-.87-.83-.87-2.18 0-3.01l3.854-4.126a2.535 2.535 0 0 1 .582-1.011 2.597 2.597 0 0 1 .059-1.127 2.659 2.659 0 0 1-.168-.487 2.85 2.85 0 0 1-.611-.741l-4.359-4.159c-.88-.841-2.37-.841-3.25 0-.87.83-.87 2.18 0 3.01l2.606 2.486a.434.434 0 0 1 0 .613l-2.606 2.486c-.88.84-2.37.84-3.25 0-.87-.83-.87-2.18 0-3.01l5.408-5.163a.434.434 0 0 1 0-.613z" />
+      </svg>
+    ),
+    url: "https://leetcode.com/u/proximaditya/",
+  },
+  {
+    name: "Kaggle",
+    // RESTORED KAGGLE ICON
+    icon: (
+      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.009-2.25 2.155v3.743c0 .167-.091.282-.247.319H4.246c-.164 0-.246-.105-.246-.319V.431c0-.163.082-.268.246-.318h2.992c.156.05.247.155.247.318v15.03l7.006-6.596c.164-.141.328-.212.492-.212h3.28c.187 0 .281.071.281.212 0 .047-.023.094-.07.141l-5.389 5.034 5.928 6.551c.141.141.164.234.07.319v2.949z" />
       </svg>
     ),
     url: "https://www.kaggle.com/adityachourasia1",
@@ -63,8 +79,7 @@ export default function Contact() {
 
         <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-20">
           <a
-            href="mailto:aditya.chourasia.work@gmail.com"
-            // NO target="_blank" for mailto links!
+            href={MAILTO_LINK}
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(249,115,22,0.3)] hover:shadow-[0_0_60px_rgba(249,115,22,0.5)]"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -77,14 +92,11 @@ export default function Contact() {
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="flex flex-wrap justify-center gap-6">
           {socialLinks.map((link, idx) => {
-            // Check if it's an email link
             const isEmail = link.url.startsWith("mailto:");
-            
             return (
               <a
                 key={idx}
                 href={link.url}
-                // Only open in a new tab if it's NOT an email
                 target={isEmail ? "_self" : "_blank"}
                 rel={isEmail ? "" : "noreferrer"}
                 className="p-4 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-orange-400 hover:bg-white/10 transition-all duration-300 hover:-translate-y-2"
