@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
   // Replace this with your actual Vercel URL once you have it
-  const baseUrl = 'https://proximaditya-portfolio.vercel.app' 
+  const baseUrl = 'https://adityachourasia.vercel.app' 
  
   return [
     {

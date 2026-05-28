@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://proximaditya-portfolio.vercel.app/sitemap.xml',
+    sitemap: 'https://adityachourasia.vercel.app/sitemap.xml',
   }
 }

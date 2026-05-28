@@ -15,15 +15,22 @@ export const metadata: Metadata = {
   description: "Portfolio of Aditya Chourasia, a Full-Stack & AI/ML Software Engineer specializing in scalable architectures, machine learning models, and intelligent web applications.",
   keywords: [
     "Aditya Chourasia",
+    "chaurasia aditya",
+    "chaurasiya",
     "Aditya Chourasia Portfolio",
     "AI Engineer",
     "Machine Learning Engineer",
     "Full Stack Developer",
     "Next.js Developer",
     "Python Developer",
+    "Hackathon Winner",
+    "Sexy boy",
     "Team XOR",
-    "Team SPARK",
+    "Team",
     "Smart India Hackathon",
+    "Amity University Noida",
+    "Amity University Hackathon",
+    "B.Tech Computer Science",
     "ISRO Hackathon",
   ],
   authors: [{ name: "Aditya Chourasia" }],
@@ -31,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-vercel-domain.vercel.app", // You can update this to your actual Vercel domain later!
+    url: "https://adityachourasia.vercel.app/", // You can update this to your actual Vercel domain later!
     title: "Aditya Chourasia | AI/ML Software Engineer",
     description: "Explore my projects, AI models, and hackathon journeys.",
     siteName: "Aditya Chourasia Portfolio",
