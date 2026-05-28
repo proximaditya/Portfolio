@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
+import Guestbook from "@/components/Guestbook";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Projects />
       <About />
+      <Guestbook /> {/* <--- Added here! */}
       <Contact />
       <Footer />
     </main>
