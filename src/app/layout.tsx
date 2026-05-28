@@ -4,14 +4,54 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
-import Preloader from "@/components/Preloader"; // <--- Import the Preloader
+import Preloader from "@/components/Preloader";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
+// 🚀 ADVANCED SEO METADATA
 export const metadata: Metadata = {
-  title: "Aditya Chourasia | AI/ML Engineer",
-  description: "Portfolio of Aditya Chourasia, AI/ML Enthusiast & Software Engineer.",
+  title: "Aditya Chourasia | AI/ML Software Engineer",
+  description: "Portfolio of Aditya Chourasia, a Full-Stack & AI/ML Software Engineer specializing in scalable architectures, machine learning models, and intelligent web applications.",
+  keywords: [
+    "Aditya Chourasia",
+    "Aditya Chourasia Portfolio",
+    "AI Engineer",
+    "Machine Learning Engineer",
+    "Full Stack Developer",
+    "Next.js Developer",
+    "Python Developer",
+    "Team XOR",
+    "Team SPARK",
+    "Smart India Hackathon",
+    "ISRO Hackathon",
+  ],
+  authors: [{ name: "Aditya Chourasia" }],
+  creator: "Aditya Chourasia",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://your-vercel-domain.vercel.app", // You can update this to your actual Vercel domain later!
+    title: "Aditya Chourasia | AI/ML Software Engineer",
+    description: "Explore my projects, AI models, and hackathon journeys.",
+    siteName: "Aditya Chourasia Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aditya Chourasia | AI/ML Software Engineer",
+    description: "Explore my projects, AI models, and hackathon journeys.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -21,10 +61,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased`}>
-        {/* Put Preloader at the very top of the body! */}
+      <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased bg-[#050505] text-white`}>
         <Preloader />
-        
         <SmoothScroll>
           <Navbar />
           <ChatWidget />

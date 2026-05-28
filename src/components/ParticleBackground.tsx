@@ -7,9 +7,11 @@ import { Points, PointMaterial } from "@react-three/drei";
 import * as random from "maath/random/dist/maath-random.esm";
 
 function StarField(props: any) {
-  const ref = useRef<any>();
-  // Generate 5000 particles in a sphere
-  const [sphere] = useState(() => random.inSphere(new Float32Array(5000*3), { radius: 1.5 }));
+  // FIXED: Added 'null' to satisfy TypeScript's strict mode!
+  const ref = useRef<any>(null);
+  
+  // Generate particles
+  const [sphere] = useState(() => random.inSphere(new Float32Array(5000 * 3), { radius: 1.5 }));
 
   useFrame((state, delta) => {
     if (ref.current) {
@@ -23,7 +25,7 @@ function StarField(props: any) {
       <Points ref={ref} positions={sphere} stride={3} frustumCulled={false} {...props}>
         <PointMaterial
           transparent
-          color="#f97316" // Subtle orange/gold tint matching your brand
+          color="#f97316"
           size={0.003}
           sizeAttenuation={true}
           depthWrite={false}
