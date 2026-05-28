@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Terminal, Cpu, Globe, Database } from "lucide-react";
+import { Terminal, Cpu, Globe, Database, Sparkles } from "lucide-react";
 
 // Tech stack data
 const skillCategories = [
@@ -69,29 +69,41 @@ export default function About() {
             </div>
             
             {/* Terminal Body */}
-            <div className="p-6 font-mono text-sm md:text-base overflow-x-auto">
-              <p className="text-pink-500">class <span className="text-green-400">AdityaChourasia</span><span className="text-zinc-300">(Engineer):</span></p>
-              
-              <div className="pl-6 mt-2">
-                <p className="text-pink-500">def <span className="text-blue-400">__init__</span><span className="text-zinc-300">(self):</span></p>
-                <p className="pl-6 text-zinc-300">self.role = <span className="text-amber-300">&quot;AI/ML Software Engineer&quot;</span></p>
-                <p className="pl-6 text-zinc-300">self.education = <span className="text-amber-300">&quot;B.Tech Computer Science&quot;</span></p>
-                <p className="pl-6 text-zinc-300">self.passion = <span className="text-amber-300">&quot;Building intelligent solutions&quot;</span></p>
+            <div className="p-6 font-mono text-sm md:text-base overflow-x-auto flex flex-col h-full">
+              <div>
+                <p className="text-pink-500">class <span className="text-green-400">AdityaChourasia</span><span className="text-zinc-300">(Engineer):</span></p>
+                
+                <div className="pl-6 mt-2">
+                  <p className="text-pink-500">def <span className="text-blue-400">__init__</span><span className="text-zinc-300">(self):</span></p>
+                  <p className="pl-6 text-zinc-300">self.role = <span className="text-amber-300">&quot;AI/ML Software Engineer&quot;</span></p>
+                  <p className="pl-6 text-zinc-300">self.education = <span className="text-amber-300">&quot;B.Tech Computer Science&quot;</span></p>
+                  <p className="pl-6 text-zinc-300">self.passion = <span className="text-amber-300">&quot;Building intelligent solutions&quot;</span></p>
+                </div>
+
+                <div className="pl-6 mt-4">
+                  <p className="text-pink-500">def <span className="text-blue-400">get_hobbies</span><span className="text-zinc-300">(self):</span></p>
+                  <p className="pl-6 text-zinc-400 italic"># A creative balance to analytical thinking</p>
+                  <p className="pl-6 text-zinc-300">return [<span className="text-amber-300">&quot;Playing Flute&quot;</span>, <span className="text-amber-300">&quot;Dramatics / Theatre&quot;</span>]</p>
+                </div>
+
+                <div className="pl-6 mt-4">
+                  <p className="text-pink-500">def <span className="text-blue-400">execute_mission</span><span className="text-zinc-300">(self):</span></p>
+                  <p className="pl-6 text-zinc-300">if self.has_coffee():</p>
+                  <p className="pl-12 text-zinc-300">return <span className="text-amber-300">&quot;Optimize ML models & deploy scaleable web apps&quot;</span></p>
+                </div>
               </div>
 
-              <div className="pl-6 mt-4">
-                <p className="text-pink-500">def <span className="text-blue-400">get_hobbies</span><span className="text-zinc-300">(self):</span></p>
-                <p className="pl-6 text-zinc-400 italic"># A creative balance to analytical thinking</p>
-                <p className="pl-6 text-zinc-300">return [<span className="text-amber-300">&quot;Playing Flute&quot;</span>, <span className="text-amber-300">&quot;Dramatics / Theatre&quot;</span>]</p>
+              {/* The magical trigger button! */}
+              <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-4 mt-auto">
+                <p className="text-zinc-500 animate-pulse">_</p>
+                <button 
+                  onClick={() => window.dispatchEvent(new Event('open-chat'))}
+                  className="flex items-center gap-2 text-xs font-sans px-4 py-2 rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 hover:text-orange-300 transition-colors"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  Ask AI About Aditya
+                </button>
               </div>
-
-              <div className="pl-6 mt-4">
-                <p className="text-pink-500">def <span className="text-blue-400">execute_mission</span><span className="text-zinc-300">(self):</span></p>
-                <p className="pl-6 text-zinc-300">if self.has_coffee():</p>
-                <p className="pl-12 text-zinc-300">return <span className="text-amber-300">&quot;Optimize ML models & deploy scaleable web apps&quot;</span></p>
-              </div>
-
-              <p className="mt-4 text-zinc-500 animate-pulse">_</p>
             </div>
           </motion.div>
 

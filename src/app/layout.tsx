@@ -3,8 +3,9 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
+import ChatWidget from "@/components/ChatWidget";
+import Preloader from "@/components/Preloader"; // <--- Import the Preloader
 
-// We import two fonts: Inter for general text, JetBrains Mono for techy/code parts
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
@@ -21,8 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased`}>
+        {/* Put Preloader at the very top of the body! */}
+        <Preloader />
+        
         <SmoothScroll>
           <Navbar />
+          <ChatWidget />
           {children}
         </SmoothScroll>
       </body>
