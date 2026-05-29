@@ -11,8 +11,9 @@ const projects = [
     role: "Full-Stack Developer",
     description: "A self-hosted, lightweight API & Website Health Dashboard. Features a custom ping engine that intercepts HTTP Server headers to detect hidden tech stacks, a dynamic live-mode engine updating every 30 seconds, historical sparkline charts, and database-level anti-spam rate limiting.",
     tags: ["Next.js", "Prisma", "PostgreSQL", "Tailwind CSS"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", 
+    image: "svg/proximaMonitor202605.png", 
     isVideo: false,
+    containImage: false,
     liveLink: "https://proximaditya-project.vercel.app/",
     githubLink: "https://github.com/proximaditya/ProximaMonitor",
   },
@@ -25,7 +26,8 @@ const projects = [
     tags: ["Python", "LLMs", "Groq Llama-3", "CLI"],
     image: "/svg/demosavage.mp4", 
     isVideo: true, 
-    liveLink: "#",
+    containImage: false,
+    liveLink: "https://github.com/proximaditya/savage-commit",
     githubLink: "https://github.com/proximaditya/savage-commit",
   },
   {
@@ -33,24 +35,26 @@ const projects = [
     title: "Smart India Hackathons ('24 & '25)",
     year: "2024 - 2025",
     role: "Team SPARK & Team XOR",
-    description: "Multi-year participation at the national level. In 2024 (Grand Finalist, Team SPARK), built an Advanced Face Recognition Technology (FRT) system for MP Police. In 2025 (Team XOR), engineered scalable, intelligent cloud solutions optimizing real-world data processing.",
+    description: "Multi-year participation at the national level. In 2024 (University Finalist), built a Face Recognition system for MP Police. In 2025 (Team XOR Again University Finalist), engineered Arelia—an AI & Blockchain tourist safety platform featuring real-time anomaly detection, predictive safety scoring, and crowd management.",
     tags: ["AI/ML", "Computer Vision", "React", "Cloud Architecture"],
-    image: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop", 
+    image: "svg/Areliascreen2026.png", 
     isVideo: false,
-    liveLink: "#",
-    githubLink: "#",
+    containImage: true, // <--- i hv to do this to zoom out
+    liveLink: "https://arelia-xor.web.app/",
+    githubLink: "https://github.com/proximaditya/",
   },
   {
     id: "isro-bah",
     title: "ISRO Antariksh Hackathon",
     year: "2025",
-    role: "Lead ML Engineer",
+    role: "XOR Team",
     description: "State-of-the-art explainable AI model for predicting forest fires across India. Built a dynamic spread simulation system based on probabilistic ensemble weather modeling using 50+ ECMWF forecasts to mitigate worst-case scenarios.",
     tags: ["Python", "XGBoost", "TensorFlow", "Scikit-Learn"],
     image: "https://images.unsplash.com/photo-1447014421976-7fec21d26d86?q=80&w=2070&auto=format&fit=crop", 
     isVideo: false,
-    liveLink: "https://team-xor.pages.dev/",
-    githubLink: "#",
+    containImage: false,
+    liveLink: "https://team-xor.pages.dev/isro-bah-2025/forest-fire-prediction/",
+    githubLink: "https://team-xor.pages.dev/",
   }
 ];
 
@@ -87,11 +91,10 @@ export default function Projects() {
                 transition={{ duration: 0.8, ease: "easeOut" }}
                 className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 lg:gap-20 items-center`}
               >
-                {/* Media Container: Changed to center items and act as a dark frame */}
+                {/* Media Container */}
                 <div className="w-full lg:w-1/2 relative group overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] aspect-[4/3] md:aspect-video lg:aspect-[4/3] flex items-center justify-center">
                   
                   {project.isVideo ? (
-                    // VIDEO FIX: object-contain, w-[90%], rounded edges
                     <video
                       src={project.image}
                       autoPlay
@@ -105,7 +108,12 @@ export default function Projects() {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                      // Check if we need to contain or cover the image
+                      className={`transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100 ${
+                        project.containImage 
+                          ? "w-[99%] h-[99%] object-contain rounded-xl shadow-2xl" 
+                          : "w-full h-full object-cover"
+                      }`}
                     />
                   )}
                   {/* Subtle Gradient Overlay */}
@@ -140,7 +148,6 @@ export default function Projects() {
                   <div className="flex items-center gap-6">
                     <a href={project.liveLink} target="_blank" rel="noreferrer" className="group flex items-center gap-2 text-white font-medium hover:text-orange-400 transition-colors">
                       View Project 
-                      {/* Arrow SVG */}
                       <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="7" y1="17" x2="17" y2="7"></line>
                         <polyline points="7 7 17 7 17 17"></polyline>
@@ -148,7 +155,6 @@ export default function Projects() {
                     </a>
                     {project.githubLink !== "#" && (
                       <a href={project.githubLink} target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-white transition-colors">
-                        {/* GitHub SVG */}
                         <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
                           <path d="M9 18c-4.51 2-5-2-7-2" />

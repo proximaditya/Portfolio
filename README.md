@@ -1,132 +1,156 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# 🌌 Aditya Chourasia — Portfolio
+### AI/ML Software Engineer & Full-Stack Developer
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer)](https://www.framer.com/motion/)
+[![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
+[![Groq](https://img.shields.io/badge/Groq_Llama_3-F55036?style=for-the-badge&logo=ai&logoColor=white)](https://groq.com/)
 
+**[View Live Portfolio](https://proximaditya.vercel.app/)** • **[Report Bug](https://github.com/proximaditya/Portfolio/issues)** 
+
+</div>
+
+---
+
+## 📖 Overview
+Welcome to the source code of my futuristic, highly-optimized developer portfolio. 
+
+Moving away from legacy HTML/JS and basic templating, this project was architected from the ground up to showcase top-tier software engineering. It combines **WebGL 3D rendering**, **Native AI Integration**, and **Server-Side Data Fetching** into a buttery-smooth, cinematic user experience.
+
+---
+
+## ✨ Core Features & Engineering Marvels
+
+### 🤖 1. "Aditya AI" — Native Chat Engine
+A floating, glassmorphic AI chatbot embedded directly into the UI.
+* **The Tech:** Powered by **Groq (Llama-3-8B)** for near-instantaneous inference.
+* **The Architecture:** Bypassed standard, bug-prone UI libraries to build a 100% custom, bulletproof React state engine. The frontend communicates with a secure Next.js backend route (`/api/chat`), ensuring API keys are never exposed to the client.
+
+### 🌌 2. WebGL 3D Preloader & Environments
+* **The Preloader:** Features a custom Framer Motion orchestration. A glowing glass orb shatters into four distinct shards while 70 stars lose gravity and scatter off-screen, seamlessly revealing the website.
+* **The Background:** Uses **React Three Fiber** and **Drei** to render a highly optimized, rotating 3D starfield (`Math.random` generated coordinates handled strictly on the client to prevent Next.js SSR hydration crashes).
+
+### 📊 3. Live Metrics Dashboard (`/dashboard`)
+A server-side rendered (SSR) dashboard that proves my skills with raw data rather than words.
+* Fetches live statistics from **GitHub** (Followers, Repositories, Total Stargazers, Top Languages).
+* Fetches live data from **LeetCode** (Total Solved, Easy/Medium/Hard breakdown).
+* Automatically caches and revalidates data every hour to prevent rate-limiting.
+
+### 📝 4. Real-Time Guestbook (Supabase)
+An interactive database implementation allowing visitors to leave reviews or say hello.
+* Uses **Supabase (PostgreSQL)**.
+* Implements Row Level Security (RLS) allowing public inserts and reads.
+* Instantly updates the UI upon submission.
+
+### 🎬 5. Cinematic Project Showcase
+A scalable, data-driven "Bento Box" and alternating-card layout supporting both static images and auto-playing `.mp4` video demos (e.g., the *Savage-Commit* CLI tool).
+
+---
+
+## 🛠️ Tech Stack & Architecture (Why I chose them)
+
+| Technology | Purpose | Justification for Future Self |
+| :--- | :--- | :--- |
+| **Next.js 16 (App Router)** | Core Framework | Unmatched SEO, SSR for the Dashboard, and secure API routes for the AI Chat. |
+| **Tailwind CSS v4** | Styling | Rapid, utility-first styling keeping the CSS bundle infinitesimally small. |
+| **Framer Motion** | Animations | Cinematic orchestrations, exit animations (`AnimatePresence`), and SVG path drawing. |
+| **Lenis JS** | Scroll Physics | The industry standard for smooth scrolling. Doesn't hijack native scroll like Locomotive does. |
+| **React Three Fiber** | 3D Graphics | Declarative Three.js. Vastly superior performance and customization compared to Vanilla Vanta.js. |
+| **Groq / Llama-3** | LLM Engine | Offers LPU (Language Processing Unit) speeds, making the chat widget feel magical and instant. |
+| **Supabase** | Backend / BaaS | Best-in-class open-source Postgres. Used for the Guestbook component. |
+
+---
+
+## 📂 Project Directory Structure
+
+```text
+adv-portfolio/
+├── public/                 # Static assets
+│   └── svg/                # SVGs and .mp4 video demos (demodavage.mp4)
+├── src/
+│   ├── app/                # Next.js App Router
+│   │   ├── api/chat/       # Secure backend route for Groq AI
+│   │   ├── dashboard/      # Live Metrics page
+│   │   ├── layout.tsx      # Global layout (SEO, Lenis Wrapper, Navbar, Preloader)
+│   │   ├── page.tsx        # Main Landing Page
+│   │   ├── sitemap.ts      # Automated SEO Sitemap
+│   │   └── robots.ts       # Automated SEO Robots instructions
+│   ├── components/         # Reusable React Components
+│   │   ├── About.tsx       # Hybrid Terminal / Bento Box Grid
+│   │   ├── ChatWidget.tsx  # Custom AI Chat UI
+│   │   ├── Contact.tsx     # Enhanced Mailto & Social SVGs
+│   │   ├── Guestbook.tsx   # Supabase live database connection
+│   │   ├── Hero.tsx        # Typography & layout over the 3D canvas
+│   │   ├── Navbar.tsx      # Floating glassmorphic navigation
+│   │   ├── ParticleBg.tsx  # React Three Fiber Starfield
+│   │   ├── Preloader.tsx   # Shattering glass initial load screen
+│   │   └── Projects.tsx    # Showcase cards (Image/Video support)
+│   └── lib/                
+│       ├── prompt.ts       # The System Prompt guiding the AI agent
+│       └── supabase.ts     # Supabase client initialization
+├── .env.local              # (Git Ignored) API Keys
+├── tailwind.config.ts      # Tailwind configuration
+└── package.json            # Project dependencies
+
+
+## 💻 Local Development Setup
+
+To run this project locally, follow these steps.
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/proximaditya/Portfolio.git
+cd Portfolio
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Setup Environment Variables
+Create a `.env.local` file in the root of the project and add your API keys. 
+*(Never commit this file!)*
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-supabase-url.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+GROQ_API_KEY=gsk_your_groq_api_key_here
+```
+
+### 4. Run the Development Server
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open `http://localhost:3000` in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Deployment (Vercel)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is optimized for zero-config deployment on Vercel.
 
-## Learn More
+1. Push your code to GitHub/GitLab.
+2. Import the repository in your Vercel Dashboard.
+3. Add the 3 environment variables in the Vercel deployment settings.
+4. Click **Deploy**.
 
-To learn more about Next.js, take a look at the following resources:
+*Next.js takes care of Edge caching, API routing, and asset optimization automatically.*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧠 Note to Future Self (Lessons Learned)
 
-## Deploy on Vercel
+- **The Hydration Mismatch:** Generating `Math.random()` on the server causes React Hydration errors when the client loads. **Fix:** Always wrap randomized initial states in a `useEffect` so they only execute on the client browser (e.g., the stars in `Preloader.tsx`).
+- **AI SDK Input Locking:** Relying on third-party SDK state for form inputs (like `useChat`'s internal input state) can cause crashes if it initializes as undefined. **Fix:** Build a native React `useState` for the form input, and manually push data to the backend array. It is 10x safer.
+- **Video Rendering:** To prevent terminal demo `.mp4` videos from being cropped by Tailwind's `object-cover`, switch them to `object-contain` with a `w-[90%]` wrapper to frame them like a monitor.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# adv-portfolio
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-* [Create](https://docs.gitlab.com/user/project/repository/web_editor/#create-a-file) or [upload](https://docs.gitlab.com/user/project/repository/web_editor/#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/proximaditya/adv-portfolio.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-* [Set up project integrations](https://gitlab.com/proximaditya/adv-portfolio/-/settings/integrations)
-
-## Collaborate with your team
-
-* [Invite team members and collaborators](https://docs.gitlab.com/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/user/project/merge_requests/creating_merge_requests/)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/user/project/issues/managing_issues/#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/topics/autodevops/requirements/)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ci/environments/protected_environments/)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
->>>>>>> 70160644f595734e03c78eb124249866d9ecf930
+<div align="center">
+  <p>Built with 🧡 by <b>Aditya Chourasia</b>.</p>
+  <p>&copy; 2026. All rights reserved.</p>
+</div>
