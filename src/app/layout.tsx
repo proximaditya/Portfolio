@@ -5,6 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 import Navbar from "@/components/Navbar";
 import ChatWidget from "@/components/ChatWidget";
 import Preloader from "@/components/Preloader";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
@@ -69,6 +70,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased bg-[#050505] text-white`}>
+        <CustomCursor />
         <Preloader />
         <SmoothScroll>
           <Navbar />

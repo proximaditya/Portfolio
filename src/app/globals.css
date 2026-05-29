@@ -10,6 +10,12 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   overflow-x: hidden;
+  cursor: none; /* <--- Hides the default cursor! */
+}
+
+/* Also hide cursor for links and buttons so our custom one shows */
+a, button, input, textarea {
+  cursor: none !important; 
 }
 
 /* Custom Scrollbar */
