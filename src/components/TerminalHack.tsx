@@ -13,11 +13,13 @@ export default function TerminalHack() {
   // Terminal State
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<React.ReactNode[]>([
-    <p key="init1">&gt; ACCESS GRANTED.</p>,
-    <p key="init2">&gt; WELCOME TO THE MAINFRAME, RECRUITER.</p>,
-    <p key="init3" className="mb-4">&gt; TYPE <span className="text-white font-bold">'help'</span> TO VIEW AVAILABLE COMMANDS.</p>
+    <p key="init1" className="text-green-500">&gt; ACCESS GRANTED.</p>,
+    <p key="init2" className="text-green-500">&gt; WELCOME TO THE MAINFRAME, RECRUITER.</p>,
+    <p key="init3" className="mb-4 text-green-500">&gt; TYPE <span className="text-white font-bold">'help'</span> TO VIEW AVAILABLE COMMANDS.</p>
   ]);
-  const [isPlaying, setIsPlaying] = useState(false);
+  
+  // "" | "snake" | "sos"
+  const [activeGame, setActiveGame] = useState<string | null>(null); 
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,7 +28,7 @@ export default function TerminalHack() {
   // 1. Keylogger to trigger the hack
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (isActive) return; // Stop listening for the code if already open
+      if (isActive) return;
       if (e.key.toLowerCase() === SECRET_CODE[keyIndex]) {
         if (keyIndex === SECRET_CODE.length - 1) {
           setIsActive(true);
@@ -49,10 +51,10 @@ export default function TerminalHack() {
 
   // Keep input focused
   useEffect(() => {
-    if (isActive && !isPlaying && inputRef.current) {
+    if (isActive && !activeGame && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isActive, isPlaying]);
+  }, [isActive, activeGame]);
 
   // 2. Matrix Rain Canvas Effect
   useEffect(() => {
@@ -87,10 +89,12 @@ export default function TerminalHack() {
   // 3. Command Handler
   const handleCommand = async (e: React.FormEvent) => {
     e.preventDefault();
-    const cmd = input.trim().toLowerCase();
-    if (!cmd) return;
+    const rawCmd = input.trim();
+    if (!rawCmd) return;
 
-    const newHistory = [...history, <p key={Date.now()}>&gt; {input}</p>];
+    const args = rawCmd.split(/\s+/);
+    const cmd = args[0].toLowerCase();
+    const newHistory = [...history, <p key={Date.now() + "-cmd"} className="text-green-500">&gt; {rawCmd}</p>];
     setInput("");
 
     if (cmd === "help") {
@@ -99,7 +103,10 @@ export default function TerminalHack() {
           <p>AVAILABLE COMMANDS:</p>
           <p><span className="text-white">intel</span>  - View classified target profile</p>
           <p><span className="text-white">whoami</span> - Execute reverse IP trace on your connection</p>
-          <p><span className="text-white">play</span>   - Initialize training simulation (Mini-game)</p>
+          <p><span className="text-white">play</span>   - Access gaming modules (snake, sos)</p>
+          <p><span className="text-white">joke</span>   - Retrieve a random developer log</p>
+          <p><span className="text-white">sudo</span>   - Execute with root privileges</p>
+          <p><span className="text-white">date</span>   - Show system time</p>
           <p><span className="text-white">clear</span>  - Wipe terminal history</p>
           <p><span className="text-white">exit</span>   - Terminate session</p>
         </div>
@@ -122,7 +129,7 @@ export default function TerminalHack() {
       try {
         const res = await fetch("https://ipapi.co/json/");
         const data = await res.json();
-        newHistory.pop(); // Remove tracing text
+        newHistory.pop();
         newHistory.push(
           <div key="ip" className="text-red-500 mb-4 mt-2 border-l-2 border-red-500 pl-4">
             <p className="font-bold">🚨 INTRUDER DETECTED!</p>
@@ -137,8 +144,37 @@ export default function TerminalHack() {
         newHistory.push(<p key="ip-err" className="text-red-500">Trace failed. Intruder using advanced proxy.</p>);
       }
     } else if (cmd === "play") {
-      setIsPlaying(true);
-      return;
+      const gameType = args[1]?.toLowerCase();
+      if (gameType === "a" || gameType === "snake") {
+        setActiveGame("snake");
+        return;
+      } else if (gameType === "s" || gameType === "sos") {
+        setActiveGame("sos");
+        return;
+      } else {
+        newHistory.push(
+          <div key={Date.now()} className="text-yellow-400 mb-2 mt-2 bg-black/50 p-3 border border-yellow-500/30">
+            <p className="font-bold text-white mb-2">⚠️ SPECIFY A GAMING MODULE</p>
+            <p>USAGE: <span className="text-green-400">play [a|s]</span></p>
+            <p className="mt-2">- <span className="text-green-400">play a</span> : Initialize Snake (Data Intercept)</p>
+            <p>- <span className="text-green-400">play s</span> : Initialize SOS (5-Player Tactical Grid)</p>
+          </div>
+        );
+      }
+    } else if (cmd === "sudo") {
+      newHistory.push(<p key={Date.now()} className="text-red-500 mt-2 mb-2 font-bold">Access Denied. User is not in the sudoers file. This incident has been reported to the Mainframe Administrator.</p>);
+    } else if (cmd === "joke") {
+      const jokes = [
+        "Why do programmers prefer dark mode? Because light attracts bugs.",
+        "I would love to change the world, but they won't give me the source code.",
+        "There are 10 types of people in the world: those who understand binary, and those who don't.",
+        "Hardware: The part of a computer that you can kick.",
+        "To understand what recursion is, you must first understand recursion."
+      ];
+      const joke = jokes[Math.floor(Math.random() * jokes.length)];
+      newHistory.push(<p key={Date.now()} className="text-cyan-400 mt-2 mb-2">🤖 {joke}</p>);
+    } else if (cmd === "date") {
+      newHistory.push(<p key={Date.now()} className="text-green-400 mt-2 mb-2">SYSTEM TIME: {new Date().toString()}</p>);
     } else if (cmd === "clear") {
       setHistory([]);
       return;
@@ -158,7 +194,7 @@ export default function TerminalHack() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[999999] bg-black overflow-hidden flex flex-col items-center justify-center text-green-500 font-mono"
+          className="fixed inset-0 z-[999999] bg-black overflow-hidden flex flex-col items-center justify-center font-mono"
           onClick={() => inputRef.current?.focus()}
         >
           {/* Matrix Background */}
@@ -167,7 +203,7 @@ export default function TerminalHack() {
           <motion.div 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="relative z-10 bg-[#050505]/90 border border-green-500/50 p-6 rounded-lg w-[90%] max-w-2xl h-[70vh] shadow-[0_0_40px_rgba(0,255,0,0.15)] backdrop-blur-md flex flex-col"
+            className="relative z-10 bg-[#050505]/90 border border-green-500/50 p-6 rounded-lg w-[90%] max-w-3xl h-[75vh] shadow-[0_0_40px_rgba(0,255,0,0.15)] backdrop-blur-md flex flex-col"
           >
             <div className="flex justify-between items-center mb-4 border-b border-green-500/30 pb-2 shrink-0">
               <div className="flex items-center gap-2 text-green-500/70">
@@ -179,8 +215,10 @@ export default function TerminalHack() {
               </button>
             </div>
 
-            {isPlaying ? (
-              <SnakeGame onExit={() => setIsPlaying(false)} />
+            {activeGame === "snake" ? (
+              <SnakeGame onExit={() => setActiveGame(null)} />
+            ) : activeGame === "sos" ? (
+              <SosGame onExit={() => setActiveGame(null)} />
             ) : (
               <div className="flex-1 overflow-y-auto custom-scrollbar flex flex-col font-mono text-sm md:text-base">
                 {history}
@@ -207,7 +245,9 @@ export default function TerminalHack() {
   );
 }
 
+// ==========================================
 // 4. Matrix Snake Mini-Game Component
+// ==========================================
 function SnakeGame({ onExit }: { onExit: () => void }) {
   const [snake, setSnake] = useState([{ x: 10, y: 10 }]);
   const [food, setFood] = useState({ x: 5, y: 5 });
@@ -233,12 +273,10 @@ function SnakeGame({ onExit }: { onExit: () => void }) {
       setSnake((prev) => {
         const head = { x: prev[0].x + dir.x, y: prev[0].y + dir.y };
         
-        // Wall collision
         if (head.x < 0 || head.x >= 20 || head.y < 0 || head.y >= 20) {
           setGameOver(true);
           return prev;
         }
-        // Self collision
         if (prev.some((s) => s.x === head.x && s.y === head.y)) {
           setGameOver(true);
           return prev;
@@ -253,7 +291,7 @@ function SnakeGame({ onExit }: { onExit: () => void }) {
         }
         return newSnake;
       });
-    }, 100); // Game Speed
+    }, 100);
     return () => clearInterval(interval);
   }, [dir, food, gameOver]);
 
@@ -264,7 +302,6 @@ function SnakeGame({ onExit }: { onExit: () => void }) {
         <span className="text-zinc-500 text-xs">[ESC] TO ABORT</span>
       </div>
       
-      {/* 20x20 Grid */}
       <div className="w-[300px] h-[300px] border-2 border-green-500/30 bg-black/50 relative grid grid-cols-20 grid-rows-20">
         {gameOver && (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/80 z-10">
@@ -277,24 +314,181 @@ function SnakeGame({ onExit }: { onExit: () => void }) {
             </button>
           </div>
         )}
-        
-        {/* Render Food */}
-        <div 
-          className="absolute bg-red-500 shadow-[0_0_10px_rgba(255,0,0,0.8)] rounded-full"
-          style={{ width: '5%', height: '5%', left: `${food.x * 5}%`, top: `${food.y * 5}%` }}
-        />
-        
-        {/* Render Snake */}
+        <div className="absolute bg-red-500 shadow-[0_0_10px_rgba(255,0,0,0.8)] rounded-full" style={{ width: '5%', height: '5%', left: `${food.x * 5}%`, top: `${food.y * 5}%` }} />
         {snake.map((segment, i) => (
+          <div key={i} className="absolute bg-green-500 border border-black" style={{ width: '5%', height: '5%', left: `${segment.x * 5}%`, top: `${segment.y * 5}%` }} />
+        ))}
+      </div>
+      <p className="mt-4 text-zinc-500 text-xs text-center">USE W,A,S,D OR ARROWS TO INTERCEPT DATA PACKETS.</p>
+    </div>
+  );
+}
+
+// ==========================================
+// 5. 5-Player SOS Grid Mini-Game
+// ==========================================
+type CellData = { letter: 'S' | 'O' | null, colorClass: string } | null;
+
+function SosGame({ onExit }: { onExit: () => void }) {
+  const size = 6; // 6x6 Grid
+  const players = [
+    { id: 0, color: "text-green-500", name: "P1 (GRN)" },
+    { id: 1, color: "text-cyan-400", name: "P2 (CYN)" },
+    { id: 2, color: "text-fuchsia-500", name: "P3 (MAG)" },
+    { id: 3, color: "text-yellow-400", name: "P4 (YLW)" },
+    { id: 4, color: "text-red-500", name: "P5 (RED)" },
+  ];
+
+  const [board, setBoard] = useState<CellData[]>(Array(size * size).fill(null));
+  const [turn, setTurn] = useState(0);
+  const [scores, setScores] = useState([0, 0, 0, 0, 0]);
+  const [selectedLetter, setSelectedLetter] = useState<'S' | 'O'>('S');
+
+  // Allow ESC to exit easily
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onExit();
+      if (e.key.toLowerCase() === 's') setSelectedLetter('S');
+      if (e.key.toLowerCase() === 'o') setSelectedLetter('O');
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onExit]);
+
+  const getLetter = (b: CellData[], r: number, c: number) => {
+    if (r >= 0 && r < size && c >= 0 && c < size) return b[r * size + c]?.letter;
+    return null;
+  };
+
+  const handleCellClick = (idx: number) => {
+    if (board[idx]) return; // Cell already filled
+
+    const newBoard = [...board];
+    newBoard[idx] = { letter: selectedLetter, colorClass: players[turn].color };
+
+    const r = Math.floor(idx / size);
+    const c = idx % size;
+    let pointsGained = 0;
+
+    // Check for SOS formations involving the newly placed letter
+    if (selectedLetter === 'S') {
+      // Look outward in all 8 directions for an 'O' immediately followed by an 'S'
+      const directions = [[-1,-1], [-1,0], [-1,1], [0,-1], [0,1], [1,-1], [1,0], [1,1]];
+      for (const [dr, dc] of directions) {
+        if (getLetter(newBoard, r + dr, c + dc) === 'O' && getLetter(newBoard, r + dr * 2, c + dc * 2) === 'S') {
+          pointsGained++;
+        }
+      }
+    } else {
+      // Look at pairs of opposite directions for 'S' ... 'O' ... 'S'
+      const pairs = [
+        [[-1,-1], [1,1]], // Main Diagonal
+        [[-1,0], [1,0]],  // Vertical
+        [[-1,1], [1,-1]], // Anti Diagonal
+        [[0,-1], [0,1]]   // Horizontal
+      ];
+      for (const [[dr1, dc1], [dr2, dc2]] of pairs) {
+        if (getLetter(newBoard, r + dr1, c + dc1) === 'S' && getLetter(newBoard, r + dr2, c + dc2) === 'S') {
+          pointsGained++;
+        }
+      }
+    }
+
+    setBoard(newBoard);
+
+    if (pointsGained > 0) {
+      // Score points and get another turn
+      const newScores = [...scores];
+      newScores[turn] += pointsGained;
+      setScores(newScores);
+    } else {
+      // Move to next player
+      setTurn((prev) => (prev + 1) % players.length);
+    }
+  };
+
+  const isGameOver = board.every((c) => c !== null);
+  const maxScore = Math.max(...scores);
+
+  return (
+    <div className="flex flex-col items-center justify-center flex-1 w-full text-xs md:text-sm">
+      <div className="flex justify-between w-full max-w-[450px] mb-4 text-green-400">
+        <span>S.O.S. MULTIPLAYER</span>
+        <span className="text-zinc-500">[ESC] TO ABORT</span>
+      </div>
+
+      {/* Scoreboard */}
+      <div className="grid grid-cols-5 gap-2 mb-4 w-full max-w-[450px]">
+        {players.map((p, i) => (
           <div 
-            key={i} 
-            className="absolute bg-green-500 border border-black"
-            style={{ width: '5%', height: '5%', left: `${segment.x * 5}%`, top: `${segment.y * 5}%` }}
-          />
+            key={p.id} 
+            className={`flex flex-col items-center p-2 border transition-all ${
+              turn === i ? `border-current bg-white/10 ${p.color}` : 'border-zinc-800 text-zinc-600'
+            }`}
+            style={turn === i ? { textShadow: '0 0 10px currentColor' } : {}}
+          >
+            <span className="font-bold whitespace-nowrap">{p.name}</span>
+            <span className="text-white mt-1">{scores[i]} PTS</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <div className="flex gap-4 mb-4">
+        <button 
+          onClick={() => setSelectedLetter('S')} 
+          className={`px-6 py-2 border transition-colors ${selectedLetter === 'S' ? 'border-green-500 text-green-500 bg-green-500/20' : 'border-zinc-700 text-zinc-500 hover:text-white'}`}
+        >
+          PLACE 'S'
+        </button>
+        <button 
+          onClick={() => setSelectedLetter('O')} 
+          className={`px-6 py-2 border transition-colors ${selectedLetter === 'O' ? 'border-green-500 text-green-500 bg-green-500/20' : 'border-zinc-700 text-zinc-500 hover:text-white'}`}
+        >
+          PLACE 'O'
+        </button>
+      </div>
+
+      {/* 6x6 Grid */}
+      <div className="grid grid-cols-6 gap-1 w-full max-w-[320px] aspect-square bg-black/50 border-2 border-zinc-800 p-1 relative">
+        {isGameOver && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/90 z-10 text-center p-4">
+            <p className="text-white font-bold mb-2">GAME OVER</p>
+            <div className="mb-4 text-sm text-yellow-400">
+              {players.map((p, i) => scores[i] === maxScore && (
+                <p key={i} className={p.color} style={{ textShadow: '0 0 8px currentColor' }}>
+                  {p.name} WINS WITH {scores[i]} PTS!
+                </p>
+              ))}
+            </div>
+            <button 
+              onClick={() => { setBoard(Array(size * size).fill(null)); setScores([0,0,0,0,0]); setTurn(0); }}
+              className="px-4 py-2 border border-green-500 text-green-500 hover:bg-green-500 hover:text-black transition-colors"
+            >
+              RESTART
+            </button>
+          </div>
+        )}
+
+        {board.map((cell, idx) => (
+          <button
+            key={idx}
+            onClick={() => handleCellClick(idx)}
+            disabled={!!cell || isGameOver}
+            className="flex items-center justify-center text-xl md:text-2xl font-bold border border-zinc-800 hover:bg-white/10 transition-colors"
+          >
+            {cell && (
+              <span className={cell.colorClass} style={{ textShadow: '0 0 10px currentColor' }}>
+                {cell.letter}
+              </span>
+            )}
+          </button>
         ))}
       </div>
       
-      <p className="mt-4 text-zinc-500 text-xs text-center">USE W,A,S,D OR ARROWS TO INTERCEPT DATA PACKETS.</p>
+      <p className="mt-4 text-zinc-500 text-xs text-center">
+        FORM "S-O-S" (HORIZONTAL, VERTICAL, DIAGONAL) TO SCORE A POINT & GET ANOTHER TURN.
+      </p>
     </div>
   );
 }
