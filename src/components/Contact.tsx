@@ -51,7 +51,6 @@ const socialLinks = [
   },
   {
     name: "Kaggle",
-    // RESTORED KAGGLE ICON
     icon: (
       <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.825 23.859c-.022.092-.117.141-.281.141h-3.139c-.187 0-.351-.082-.492-.248l-5.178-6.009-2.25 2.155v3.743c0 .167-.091.282-.247.319H4.246c-.164 0-.246-.105-.246-.319V.431c0-.163.082-.268.246-.318h2.992c.156.05.247.155.247.318v15.03l7.006-6.596c.164-.141.328-.212.492-.212h3.28c.187 0 .281.071.281.212 0 .047-.023.094-.07.141l-5.389 5.034 5.928 6.551c.141.141.164.234.07.319v2.949z" />
@@ -64,30 +63,53 @@ const socialLinks = [
 export default function Contact() {
   return (
     <section id="contact" className="w-full py-32 px-6 md:px-12 lg:px-24 bg-[#050505] relative z-10 overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+      
+      {/* Dynamic Animated Background Glows */}
+      <motion.div 
+        animate={{ scale: [1, 1.2, 1], opacity: [0.15, 0.3, 0.15] }} 
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-orange-600/20 blur-[120px] rounded-full pointer-events-none" 
+      />
+      <motion.div 
+        animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0.2, 0.1] }} 
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-amber-400/20 blur-[100px] rounded-full pointer-events-none" 
+      />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <motion.div initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <h2 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tighter">
             Let&apos;s build something <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300">extraordinary.</span>
+            <span className="relative inline-block mt-2">
+              {/* Perfectly contoured blur layer behind the text to create a true glow */}
+              <span className="absolute top-0 left-0 w-full h-full text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-300 blur-xl opacity-70 select-none">
+                extraordinary.
+              </span>
+              <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">
+                extraordinary.
+              </span>
+            </span>
           </h2>
           <p className="text-zinc-400 text-lg md:text-xl mb-12 max-w-2xl mx-auto">
             Whether you have a challenging project in mind, a unique opportunity, or are simply passionate about the future of AI and technology, I&apos;m eager to connect.
           </p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-20">
-          <a
-            href={MAILTO_LINK}
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-lg transition-transform hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(249,115,22,0.3)] hover:shadow-[0_0_60px_rgba(249,115,22,0.5)]"
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <rect width="20" height="16" x="2" y="4" rx="2" />
-              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-            </svg>
-            Say Hello
-          </a>
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.2 }} className="mb-20 flex justify-center">
+          <div className="relative inline-flex group">
+            {/* Rich Animated Gradient Glow behind the button */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-orange-600 to-amber-400 rounded-full blur-lg opacity-40 group-hover:opacity-80 transition duration-500 group-hover:duration-200"></div>
+            <a
+              href={MAILTO_LINK}
+              className="relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-lg transition-transform hover:scale-[1.02] active:scale-95"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect width="20" height="16" x="2" y="4" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+              Say Hello
+            </a>
+          </div>
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.4 }} className="flex flex-wrap justify-center gap-6">
@@ -99,7 +121,7 @@ export default function Contact() {
                 href={link.url}
                 target={isEmail ? "_self" : "_blank"}
                 rel={isEmail ? "" : "noreferrer"}
-                className="p-4 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-orange-400 hover:bg-white/10 transition-all duration-300 hover:-translate-y-2"
+                className="p-4 rounded-full bg-white/5 border border-white/10 text-zinc-400 hover:text-white transition-all duration-300 hover:-translate-y-2 hover:border-orange-500/50 hover:bg-orange-500/20 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)]"
                 aria-label={link.name}
               >
                 {link.icon}
