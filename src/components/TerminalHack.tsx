@@ -26,7 +26,9 @@ export default function TerminalHack() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   // 1. Keylogger to trigger the hack
+  
   useEffect(() => {
+    // Keyboard trigger (Desktop)
     const handleKeyDown = (e: KeyboardEvent) => {
       if (isActive) return;
       if (e.key.toLowerCase() === SECRET_CODE[keyIndex]) {
@@ -40,8 +42,17 @@ export default function TerminalHack() {
         setKeyIndex(0);
       }
     };
+
+    // Mobile Search Bar Trigger
+    const handleRemoteTrigger = () => setIsActive(true);
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("open-terminal", handleRemoteTrigger); // Added this!
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("open-terminal", handleRemoteTrigger); // Added this!
+    };
   }, [keyIndex, isActive]);
 
   // Auto-scroll to bottom of terminal
