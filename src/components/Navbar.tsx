@@ -90,7 +90,7 @@ export default function Navbar() {
                 autoFocus
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Enter override code..."
+                placeholder="Enter override code...Aditya is the key 😉"
                 className="flex-1 bg-transparent border-none outline-none text-white text-sm placeholder:text-zinc-600 font-mono"
               />
             </motion.div>
