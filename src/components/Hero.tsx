@@ -1,18 +1,19 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import ParticleBackground from "./ParticleBackground";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileText } from "lucide-react";
+import ResumeModal from "./ResumeModal"; // <--- Import the modal!
 
 export default function Hero() {
+  const [isResumeOpen, setIsResumeOpen] = useState(false);
+
   return (
     <section className="relative w-full h-screen flex items-center justify-center overflow-hidden">
-      {/* 3D Background */}
       <ParticleBackground />
 
-      {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 max-w-5xl">
-        
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -50,18 +51,25 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4"
         >
-          <button className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium transition-transform hover:scale-105 active:scale-95">
+          <a href="#projects" className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium transition-transform hover:scale-105 active:scale-95">
             Explore My Work
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </button>
-          <button className="px-8 py-4 bg-white/5 text-white border border-white/10 rounded-full font-medium backdrop-blur-sm transition-all hover:bg-white/10 hover:scale-105 active:scale-95">
+          </a>
+          {/* 🚀 Button Triggers the 3D Modal */}
+          <button 
+            onClick={() => setIsResumeOpen(true)}
+            className="flex items-center justify-center gap-2 px-8 py-4 bg-white/5 text-white border border-white/10 rounded-full font-medium backdrop-blur-sm transition-all hover:bg-white/10 hover:border-orange-500/50 hover:scale-105 active:scale-95 shadow-[0_0_0_rgba(249,115,22,0)] hover:shadow-[0_0_20px_rgba(249,115,22,0.3)]"
+          >
+            <FileText className="w-4 h-4" />
             View Resume
           </button>
         </motion.div>
       </div>
 
-      {/* Bottom fade gradient to blend into the next section */}
       <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-[#050505] to-transparent z-10 pointer-events-none"></div>
+
+      {/* 🚀 Mount the Modal here */}
+      <ResumeModal isOpen={isResumeOpen} onClose={() => setIsResumeOpen(false)} />
     </section>
   );
 }

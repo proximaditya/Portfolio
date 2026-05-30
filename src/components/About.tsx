@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Terminal, Cpu, Globe, Database, Sparkles } from "lucide-react";
-
+import SpotlightCard from "./SpotlightCard";
 // Tech stack data
 const skillCategories = [
   {
@@ -116,9 +116,9 @@ export default function About() {
             className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             {skillCategories.map((category, idx) => (
-              <div 
+              <SpotlightCard 
                 key={idx} 
-                className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300 flex flex-col h-full"
+                className="p-6 transition-colors duration-300 flex flex-col h-full"
               >
                 <div className="flex items-center gap-3 mb-4">
                   {category.icon}
@@ -128,13 +128,13 @@ export default function About() {
                   {category.skills.map((skill, i) => (
                     <span 
                       key={i} 
-                      className="px-3 py-1 text-sm text-zinc-400 bg-[#050505] border border-white/10 rounded-md"
+                      className="px-3 py-1 text-sm text-zinc-400 bg-[#050505] border border-white/10 rounded-md shadow-sm"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </motion.div>
 

@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Guestbook from "@/components/Guestbook";
 import Footer from "@/components/Footer";
+import TechShowcase from "@/components/TechShowcase";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <Projects />
       <About />
+      <TechShowcase />
       <Guestbook /> {/* <--- Added here! */}
       <Contact />
       <Footer />
