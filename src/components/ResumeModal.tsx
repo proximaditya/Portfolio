@@ -98,7 +98,7 @@ export default function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onCl
                   />
                 )}
                 
-                {/* 🚀 THE INSANE 3D FLOATING TEXT */}
+                {/* 3D FLOATING TEXT */}
                 <div style={{ transform: "translateZ(80px)", transformStyle: "preserve-3d" }} className="flex flex-col h-full pointer-events-none">
                   <h2 className="text-3xl font-bold text-white mb-2 tracking-wide drop-shadow-xl pointer-events-auto">Aditya Chourasia</h2>
                   <p className="text-orange-500 font-mono text-sm mb-8 drop-shadow-md pointer-events-auto">AI/ML Software Engineer</p>
@@ -108,8 +108,8 @@ export default function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onCl
                       <h3 className="text-white font-semibold mb-2 border-b border-white/10 pb-2">Experience Highlights</h3>
                       <ul className="list-disc pl-5 space-y-2">
                         <li>ISRO Antariksh Hackathon Lead ML Eng</li>
-                        <li>Smart India Hackathon Grand Finalist</li>
-                        <li>Architected ProximaMonitor & Arelia</li>
+                        <li>Smart India Hackathon UniversityFinalist</li>
+                        <li>Developed ProximaMonitor & Arelia</li>
                       </ul>
                     </div>
                     <div>
@@ -141,7 +141,7 @@ export default function ResumeModal({ isOpen, onClose }: { isOpen: boolean; onCl
                   <div className="space-y-6 text-zinc-300 text-sm flex-1 pointer-events-auto">
                     <div>
                       <h3 className="text-orange-400 font-semibold mb-1">B.Tech Computer Science</h3>
-                      <p className="text-xs text-zinc-500 mb-2">2022 - 2026</p>
+                      <p className="text-xs text-zinc-500 mb-2">2024 - 2028</p>
                       <p className="leading-relaxed">Core focus on Artificial Intelligence, Data Structures, and Systems Architecture.</p>
                     </div>
                     <div>
