@@ -1,5 +1,4 @@
-<
-  iv align="center">
+<div align="center">
 
 # 🌌 Aditya Chourasia — Portfolio
 ### AI/ML Software Engineer & Full-Stack Developer
