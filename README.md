@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌌 Aditya Chourasia — Advanced Portfolio
+# 🌌 Aditya Chourasia — Portfolio
 ### AI/ML Software Engineer & Full-Stack Developer
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
