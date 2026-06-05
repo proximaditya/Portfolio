@@ -1,4 +1,5 @@
-<div align="center">
+<
+  iv align="center">
 
 # 🌌 Aditya Chourasia — Portfolio
 ### AI/ML Software Engineer & Full-Stack Developer
@@ -10,7 +11,7 @@
 [![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![Groq](https://img.shields.io/badge/Groq_Llama_3.1-F55036?style=for-the-badge&logo=ai&logoColor=white)](https://groq.com/)
 
-**[View Live Portfolio](https://proximaditya.vercel.app/)** • **[Report Bug](https://github.com/proximaditya/Portfolio/issues)** 
+**[View Live Portfolio](https://adityachourasia.vercel.app/)** • **[Report Bug](https://github.com/proximaditya/Portfolio/issues)** 
 
 </div>
 
